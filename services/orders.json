@@ -1,0 +1,21 @@
+const fs = require("fs");
+const path = require("path");
+
+const ordersFile = path.join(__dirname, "../database/orders.json");
+
+function saveOrder(order) {
+    const orders = JSON.parse(fs.readFileSync(ordersFile, "utf8"));
+
+    orders.push(order);
+
+    fs.writeFileSync(
+        ordersFile,
+        JSON.stringify(orders, null, 2)
+    );
+
+    return order;
+}
+
+module.exports = {
+    saveOrder
+};
